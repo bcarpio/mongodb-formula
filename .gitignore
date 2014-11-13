@@ -1,0 +1,13 @@
+pkg/
+metadata.json
+.DS_Store
+.DS_Store?
+._*
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
+*.html
+*.tmp
