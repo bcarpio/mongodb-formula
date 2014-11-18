@@ -12,7 +12,7 @@
 {% set settings       = salt['pillar.get']('mongodb:settings', {}) %}
 {% set bind_ip        = salt['grains.get']('fqdn_ip4', "127.0.0.1") %}
 {% set port           = salt['pillar.get']('mongodb:port', 27017) %}
-{% set replica_set    = salt['pillar.get']('mongodb:replica_set', {}) %}
+{% set replica_set    = salt['pillar.get']('mongodb:replica_set', "utopia-api") %}
 {% set config_svr     = salt['pillar.get']('mongodb:config_svr', False) %}
 {% set shard_svr      = salt['pillar.get']('mongodb:shard_svr', False) %}
 {% set use_ppa        = salt['pillar.get']('mongodb:use_ppa', none) %}
