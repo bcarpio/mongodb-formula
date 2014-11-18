@@ -6,7 +6,7 @@ dbpath = {{ dbpath }}
 logpath = {{ logpath }}/mongodb.log
 
 {% if replica_set -%}
-replSet = {{ replica_set.get('name') }}
+replSet = {{ replica_set }}
 {% endif %}
 
 {% if config_svr == True %}
