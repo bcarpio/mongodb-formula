@@ -1,6 +1,9 @@
 # This file is managed by Salt!
 
+{% if bind_ip -%}
 bind_ip = {{ bind_ip }}
+{% endif %}
+
 port = {{ port }}
 dbpath = {{ dbpath }}
 logpath = {{ logpath }}/mongodb.log
@@ -9,10 +12,10 @@ logpath = {{ logpath }}/mongodb.log
 replSet = {{ replica_set }}
 {% endif %}
 
-{% if config_svr == True %}
+{% if config_svr == True -%}
 configsvr=true
 {% endif %}
 
-{% if shard_svr == True %}
+{% if shard_svr == True -%}
 shardsvr=true
 {% endif %}
