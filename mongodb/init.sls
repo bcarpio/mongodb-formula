@@ -10,6 +10,8 @@
 {% if version is not none %}
 
 {% set settings       = salt['pillar.get']('mongodb:settings', {}) %}
+{% set bind_ip        = salt['grains.get']('fqdn_ip4', "127.0.0.1") %}
+{% set port           = salt['pillar.get']('mongodb:port', 27017) %}
 {% set replica_set    = salt['pillar.get']('mongodb:replica_set', {}) %}
 {% set config_svr     = salt['pillar.get']('mongodb:config_svr', False) %}
 {% set shard_svr      = salt['pillar.get']('mongodb:shard_svr', False) %}
@@ -73,8 +75,8 @@ mongodb_configuration:
     - context:
         dbpath: {{ db_path }}
         logpath: {{ log_path }}
-        port: {{ settings.get('port', 27017) }}
-        bind_ip: {{ settings.get('bind_ip', "127.0.0.1") }}
+        bind_ip: {{ bind_ip }}
+        port: {{ port }}
         replica_set: {{ replica_set }}
         config_svr: {{ config_svr }}
         shard_svr: {{ shard_svr }}
