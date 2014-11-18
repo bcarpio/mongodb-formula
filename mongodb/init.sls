@@ -14,7 +14,7 @@
 {% set config_svr     = salt['pillar.get']('mongodb:config_svr', False) %}
 {% set shard_svr      = salt['pillar.get']('mongodb:shard_svr', False) %}
 {% set use_ppa        = salt['pillar.get']('mongodb:use_ppa', none) %}
-{% set db_path        = settings.get('db_path', '/data/db') %}
+{% set db_path        = settings.get('db_path', '/mnt/data') %}
 {% set log_path       = settings.get('log_path', '/var/log/mongodb') %}
 
 include:
