@@ -1,7 +1,10 @@
-mongodb
-=======
+mongodb-formula
+================
 
-mongodb
--------
+Available states
+================
 
-Install mongodb server and service
+``mongodb``
+------------
+
+Install mongodb server and service.
