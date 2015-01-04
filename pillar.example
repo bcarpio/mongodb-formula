@@ -9,7 +9,7 @@ mongodb:
   config_svr: False
   shard_svr: False
   settings:
-    db_path: /mnt/data
+    db_path: /data
     log_path: /var/log/mongodb
     log_append: True
     rest: True
