@@ -1,3 +1,4 @@
+.vagrant/
 pkg/
 metadata.json
 .DS_Store
