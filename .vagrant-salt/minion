@@ -1,0 +1,4 @@
+file_client: local
+mine_functions:
+  network.ip_addrs: []
+  grains.items: []

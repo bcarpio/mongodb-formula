@@ -4,7 +4,7 @@
 # see http://lodge.glasgownet.com/2012/07/11/apt-key-from-behind-a-firewall/comment-page-1/ for details
 {% from "mongodb/map.jinja" import mongodb with context %}
 
-{% set version        = salt['pillar.get']('mongodb:version', '2.6.4') %}
+{% set version        = salt['pillar.get']('mongodb:version', '2.4.6') %}
 {% set package_name   = salt['pillar.get']('mongodb:package_name', "mongodb-10gen") %}
 
 {% if version is not none %}
@@ -12,15 +12,12 @@
 {% set settings       = salt['pillar.get']('mongodb:settings', {}) %}
 {% set bind_ip        = salt['pillar.get']('mongodb:bind_ip', {}) %}
 {% set port           = salt['pillar.get']('mongodb:port', 27017) %}
-{% set replica_set    = salt['pillar.get']('mongodb:replica_set', "utopia-api") %}
+{% set replica_set    = salt['pillar.get']('mongodb:replica_set', "mongodb") %}
 {% set config_svr     = salt['pillar.get']('mongodb:config_svr', False) %}
 {% set shard_svr      = salt['pillar.get']('mongodb:shard_svr', False) %}
-{% set use_ppa        = salt['pillar.get']('mongodb:use_ppa', none) %}
+{% set use_ppa        = salt['pillar.get']('mongodb:use_ppa', True) %}
 {% set db_path        = settings.get('db_path', '/data') %}
 {% set log_path       = settings.get('log_path', '/var/log/mongodb') %}
-
-include:
-  - .tools
 
 mongodb_package:
 {% if use_ppa %}
