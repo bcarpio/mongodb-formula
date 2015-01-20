@@ -34,25 +34,20 @@
   file.symlink:
     - target: /journal
 
-mongodb_package:
-{% if use_ppa %}
-  pkgrepo.managed:
-    - humanname: MongoDB PPA
-    - name: deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen
-    - file: /etc/apt/sources.list.d/mongodb.list
-    - keyid: 7F0CEB10
-    - keyserver: keyserver.ubuntu.com
-  pkg.installed:
-    - name: {{ package_name }}
-    - version: {{ version }}
-{% else %}
-  pkg.installed:
-     - name: mongodb
-{% endif %}
-
 mongodb_db_path:
   file.directory:
     - name: {{ db_path }}
+    - user: mongodb
+    - group: mongodb
+    - mode: 755
+    - makedirs: True
+    - recurse:
+        - user
+        - group
+
+mongodb_journal_path:
+  file.directory:
+    - name: /journal
     - user: mongodb
     - group: mongodb
     - mode: 755
@@ -68,13 +63,6 @@ mongodb_log_path:
     - group: mongodb
     - mode: 755
     - makedirs: True
-
-mongodb_service:
-  service.running:
-    - name: {{ mongodb.mongod }}
-    - enable: True
-    - watch:
-      - file: mongodb_configuration
 
 mongodb_configuration:
   file.managed:
@@ -101,5 +89,29 @@ mongodb_logrotate:
     - group: root
     - mode: 440
     - source: salt://mongodb/files/logrotate.jinja
+
+mongodb_package:
+{% if use_ppa %}
+  pkgrepo.managed:
+    - humanname: MongoDB PPA
+    - name: deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen
+    - file: /etc/apt/sources.list.d/mongodb.list
+    - keyid: 7F0CEB10
+    - keyserver: keyserver.ubuntu.com
+  pkg.installed:
+    - name: {{ package_name }}
+    - version: {{ version }}
+{% else %}
+  pkg.installed:
+     - name: mongodb
+{% endif %}
+
+mongodb_service:
+  service.running:
+    - name: {{ mongodb.mongod }}
+    - enable: True
+    - watch:
+      - file: mongodb_configuration
+
 
 {% endif %}
