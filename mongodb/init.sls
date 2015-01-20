@@ -15,8 +15,8 @@
 {% set config_svr     = salt['pillar.get']('mongodb:config_svr', False) %}
 {% set shard_svr      = salt['pillar.get']('mongodb:shard_svr', False) %}
 {% set use_ppa        = salt['pillar.get']('mongodb:use_ppa', True) %}
-{% set db_path        = settings.get('db_path', '/data') %}
-{% set log_path       = settings.get('log_path', '/var/log/mongodb') %}
+{% set db_path        = salt['pillar.get']('mongodb:db_path', '/data') %}
+{% set log_path       = salt['pillar.get']('mongodb:log_path', '/var/log/mongodb') %}
 
 /data:
   mount.mounted:
