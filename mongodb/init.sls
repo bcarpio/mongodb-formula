@@ -19,6 +19,22 @@
 {% set db_path        = settings.get('db_path', '/data') %}
 {% set log_path       = settings.get('log_path', '/var/log/mongodb') %}
 
+/data:
+  mount.mounted:
+    - device: /dev/xvdf
+    - fstype: ext4
+    - mkmnt: True
+  
+/journal:
+  mount.mounted:
+    - device: /dev/xvdg
+    - fstype: ext4
+    - mkmnt: True
+  
+/data/journal:
+  file.symlink:
+    - target: /journal
+
 mongodb_package:
 {% if use_ppa %}
   pkgrepo.managed:
@@ -86,19 +102,5 @@ mongodb_logrotate:
     - group: root
     - mode: 440
     - source: salt://mongodb/files/logrotate.jinja
-
-/data:
-  mount.mounted:
-    - device: /dev/sdf
-    - fstype: ext4
-  
-/journal:
-  mount.mounted:
-    - device: /dev/sdg
-    - fstype: ext4
-  
-/data/journal:
-  file.symlink:
-    - target: /journal
 
 {% endif %}
