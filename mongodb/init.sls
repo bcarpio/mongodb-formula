@@ -87,4 +87,18 @@ mongodb_logrotate:
     - mode: 440
     - source: salt://mongodb/files/logrotate.jinja
 
+/data:
+  mount.mounted:
+    - device: /dev/sdf
+    - fstype: ext4
+  
+/journal:
+  mount.mounted:
+    - device: /dev/sdg
+    - fstype: ext4
+  
+/data/journal:
+  file.symlink:
+    - target: /journal
+
 {% endif %}
